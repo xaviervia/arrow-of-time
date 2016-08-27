@@ -78,9 +78,9 @@ timelines.push(subscribedTimeline.getNext({ type: 'item', payload: 'home' }))
 timelines.push(timelines[0].getNext({ type: 'item', payload: 'sea' }))
 timelines.push(timelines[1].getNext({ type: 'item', payload: 'mountains' }))
 
-timeline.rewind()
-timeline.rewind()
-timeline.redo()
+timelines.push(timelines[2].rewind())
+timelines.push(timelines[3].rewind())
+timelines.push(timelines[4].redo())
 ```
 
 ## Store
