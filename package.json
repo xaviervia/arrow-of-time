@@ -12,7 +12,8 @@
     "test:coverage": "npm run test:unit -- --coverage",
     "test:lint": "sagui lint",
     "test:unit": "cross-env NODE_ENV=test sagui test",
-    "test:unit:watch": "npm run test:unit -- --watch"
+    "test:unit:watch": "npm run test:unit -- --watch",
+    "prepublish": "make prepublish"
   },
   "keywords": [],
   "author": "",
