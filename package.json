@@ -13,7 +13,7 @@
     "test:lint": "sagui lint",
     "test:unit": "cross-env NODE_ENV=test sagui test",
     "test:unit:watch": "npm run test:unit -- --watch",
-    "prepublish": "make prepublish"
+    "prepublish": "npm run build && mv dist/* ."
   },
   "keywords": [],
   "author": "Fernando Via Canel <fernando.via@gmail.com>",
