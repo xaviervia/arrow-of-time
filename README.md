@@ -2,7 +2,9 @@
 
 Experiment with minimum possible composable implementation of a history (such as a Redux store, Act history, etc).
 
-To try it out, clone the repo and `npm install`. Then `npm start` and head to `http://localhost:3000/demo/timeline.html` and `http://localhost:3000/demo/snapshot.html`.
+As of v0.1.3, the Store is API compatible with the Redux store, and tested working in integration with `react-redux`, which means that you can use it as a drop-in replacement of Redux. Redux middlewares and enhancers will however not work on Arrow of Time, but the point of the experiment is to some extent to prove that subscribers are enough, especially if timeline transversing experimentation tools are going to be used.
+
+To try it out, clone the repo and `npm install`. Then `npm start` and head to `http://localhost:3000/demo/timeline.html` and `http://localhost:3000/demo/snapshot.html`. You can also take a look in the [Test Arrow of Time](https://github.com/xaviervia/test-arrow-of-time/blob/master/src/redux.js#L53) repo, that features an example of using Arrow of Time with React Redux.
 
 ## Install
 
