@@ -1,7 +1,7 @@
 {
-  "name": "sandbox",
-  "version": "1.0.0",
-  "description": "",
+  "name": "arrow-of-time",
+  "version": "0.1.0",
+  "description": "Experiment with minimum possible composable implementation of a history (such as a Redux store, Act history, etc).",
   "main": "index.js",
   "scripts": {
     "test": "npm run test:lint && npm run test:unit",
@@ -16,7 +16,7 @@
     "prepublish": "make prepublish"
   },
   "keywords": [],
-  "author": "",
+  "author": "Fernando Via Canel <fernando.via@gmail.com>",
   "license": "ISC",
   "devDependencies": {
     "react": "^15.3.1",
