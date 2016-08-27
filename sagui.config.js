@@ -3,5 +3,15 @@
  * see: http://sagui.js.org/
  */
 module.exports = {
-  pages: ['index']
+  pages: ['demo/index'],
+
+  libraries: [
+    'snapshot',
+    'withActionsLog',
+    'withInitialState',
+    'withMiddleware',
+    'withPrevState',
+    'withRewind',
+    'withSubscriber'
+  ]
 }

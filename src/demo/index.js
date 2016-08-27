@@ -1,14 +1,14 @@
 import React from 'react'
 import { render } from 'react-dom'
-import snapshot from 'toys/snapshot'
-import withActionsLog from 'toys/withActionsLog'
-import withMiddleware from 'toys/withMiddleware'
-import withPrevState from 'toys/withPrevState'
-import withSubscriber from 'toys/withSubscriber'
-import withInitialState from 'toys/withInitialState'
-import withRewind from 'toys/withRewind'
+import snapshot from '../snapshot'
+import withActionsLog from '../withActionsLog'
+import withMiddleware from '../withMiddleware'
+import withPrevState from '../withPrevState'
+import withSubscriber from '../withSubscriber'
+import withInitialState from '../withInitialState'
+import withRewind from '../withRewind'
 
-import compose from 'lib/compose'
+import compose from '../lib/compose'
 
 const reducer = (state, action) => {
   switch (action.type) {
