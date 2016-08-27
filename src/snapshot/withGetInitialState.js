@@ -1,11 +1,11 @@
-const withInitialState = (initialState) => (snapshot) => ({
+const withGetInitialState = (initialState) => (snapshot) => ({
   ...snapshot,
 
   getInitialState: () => initialState || snapshot.getState(),
 
   getNext: (action) => {
     const nextSnapshot = snapshot.getNext(action)
-    const nextWithInitialState = withInitialState(initialState || snapshot.getState())(nextSnapshot)
+    const nextWithInitialState = withGetInitialState(initialState || snapshot.getState())(nextSnapshot)
 
     return {
       ...nextSnapshot,
@@ -15,4 +15,4 @@ const withInitialState = (initialState) => (snapshot) => ({
   }
 })
 
-export default withInitialState
+export default withGetInitialState

@@ -8,7 +8,7 @@
     "build": "sagui build",
     "develop": "sagui develop --port 3000",
     "dist": "cross-env NODE_ENV=production sagui build --optimize",
-    "start": "npm run develop",
+    "start": "webpack-dashboard -- npm run develop",
     "test:coverage": "npm run test:unit -- --coverage",
     "test:lint": "sagui lint",
     "test:unit": "cross-env NODE_ENV=test sagui test",
@@ -21,6 +21,7 @@
   "devDependencies": {
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
-    "sagui": "^6.4.1"
+    "sagui": "^6.4.1",
+    "webpack-dashboard": "^0.1.8"
   }
 }

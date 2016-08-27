@@ -1,11 +1,7 @@
 const withRewind = (prevSnapshot) => (snapshot) => ({
   ...snapshot,
 
-  rewind: () => {
-    console.log('ORIGINAL REWIND')
-
-    return prevSnapshot
-  },
+  rewind: () => prevSnapshot,
 
   getNext: (action) => {
     const nextSnapshot = snapshot.getNext(action)

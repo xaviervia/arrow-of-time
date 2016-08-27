@@ -1,11 +1,11 @@
-const withAction = (action) => (snapshot) => ({
+const withGetAction = (action) => (snapshot) => ({
   ...snapshot,
 
   getAction: () => action,
 
   getNext: (action) => {
     const nextSnapshot = snapshot.getNext(action)
-    const nextWithAction = withAction(action)(nextSnapshot)
+    const nextWithAction = withGetAction(action)(nextSnapshot)
 
     return {
       ...nextSnapshot,
@@ -15,4 +15,4 @@ const withAction = (action) => (snapshot) => ({
   }
 })
 
-export default withAction
+export default withGetAction

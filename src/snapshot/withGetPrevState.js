@@ -1,5 +1,5 @@
 // NOTE: Peek previous state instead
-const withPrevState = (snapshot) => ({
+const withGetPrevState = (snapshot) => ({
   ...snapshot,
 
   getNext: (action) => {
@@ -8,9 +8,9 @@ const withPrevState = (snapshot) => ({
     return {
       ...nextSnapshot,
       getPrevState: () => snapshot.getState(),
-      getNext: withPrevState(nextSnapshot).getNext
+      getNext: withGetPrevState(nextSnapshot).getNext
     }
   }
 })
 
-export default withPrevState
+export default withGetPrevState

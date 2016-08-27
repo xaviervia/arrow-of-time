@@ -2,21 +2,26 @@
  * Sagui configuration object
  * see: http://sagui.js.org/
  */
+const DashboardPlugin = require('webpack-dashboard/plugin')
+
 module.exports = {
   pages: [
     'demo/index',
     'demo/snapshot',
+    'demo/store',
     'demo/timeline'
   ],
 
   libraries: [
-    'snapshot',
-    'timeline',
-    'snapshot/withActionsLog',
-    'snapshot/withInitialState',
-    'snapshot/withMiddleware',
-    'snapshot/withPrevState',
-    'snapshot/withRewind',
-    'snapshot/withSubscriber'
-  ]
+    'index',
+    'snapshot/index',
+    'store/index',
+    'timeline/index'
+  ],
+
+  webpack: {
+    plugins: [
+      new DashboardPlugin()
+    ]
+  }
 }

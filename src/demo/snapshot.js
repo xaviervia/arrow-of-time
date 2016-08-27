@@ -1,16 +1,10 @@
 import React from 'react'
 import { render } from 'react-dom'
-import snapshot from '../snapshot'
-import withAction from '../snapshot/withAction'
-import withActionsLog from '../snapshot/withActionsLog'
-import withMiddleware from '../snapshot/withMiddleware'
-import withPrevState from '../snapshot/withPrevState'
-import withSubscriber from '../snapshot/withSubscriber'
-import withInitialState from '../snapshot/withInitialState'
-import withRewind from '../snapshot/withRewind'
+import snapshot, { withMiddleware, withGetActionsLog, subscribe, rewindable } from '../snapshot'
+
+import { rewind } from '../'
 
 import compose from '../lib/compose'
-import times from '../lib/times'
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -42,13 +36,10 @@ const initialState = { items: [] }
 const initialSnapshot = snapshot(reducer, initialState)
 
 const start = compose(
-  withActionsLog([]),
+  withGetActionsLog([]),
   withMiddleware(loggingMiddleware),
-  withSubscriber(loggingSubscriber),
-  withPrevState,
-  withInitialState(),
-  withRewind(),
-  withAction()
+  subscribe(loggingSubscriber),
+  rewindable()
 )(initialSnapshot)
 
 const snapshot1 = start.getNext({
@@ -76,12 +67,6 @@ const snapshot5 = snapshot4.rewind()
 const snapshot6 = snapshot5.rewind()
 
 const snapshot7 = snapshot6.rewind()
-
-const rewind = (amount) => (snapshot) =>
-  times(amount)(
-    (rewinded) => rewinded.rewind(),
-    snapshot
-  )
 
 const snapshots = [
   snapshot1,

@@ -1,4 +1,4 @@
-const withSubscriber = (subscriber) => (snapshot) => ({
+const subscribe = (subscriber) => (snapshot) => ({
   ...snapshot,
 
   getNext: (action) => {
@@ -8,9 +8,9 @@ const withSubscriber = (subscriber) => (snapshot) => ({
 
     return {
       ...nextSnapshot,
-      getNext: withSubscriber(subscriber)(nextSnapshot).getNext
+      getNext: subscribe(subscriber)(nextSnapshot).getNext
     }
   }
 })
 
-export default withSubscriber
+export default subscribe

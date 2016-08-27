@@ -1,14 +1,10 @@
 const redoable = (prev) => (snapshot) => ({
   ...snapshot,
 
-  rewind: () => {
-    console.log('ORIGINAL REWIND')
-
-    return {
-      ...prev,
-      redo: () => snapshot
-    }
-  },
+  rewind: () => ({
+    ...prev,
+    redo: () => snapshot
+  }),
 
   getNext: (action) => {
     const next = snapshot.getNext(action)

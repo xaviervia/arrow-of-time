@@ -1,8 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
-import timeline from '../timeline'
-import withActionsLog from '../snapshot/withActionsLog'
-import withSubscriber from '../snapshot/withSubscriber'
+import timeline, { subscribe } from '../timeline'
+import { withGetActionsLog } from '../snapshot'
 
 import compose from '../lib/compose'
 
@@ -29,8 +28,8 @@ const subscriber = (counter = 0) => (timeline) => {
 }
 
 const start = compose(
-  withActionsLog([]),
-  withSubscriber(subscriber())
+  withGetActionsLog([]),
+  subscribe(subscriber())
 )(initialTimeline)
 
 console.log('Start', start)
