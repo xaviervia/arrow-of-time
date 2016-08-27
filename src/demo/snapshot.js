@@ -1,11 +1,16 @@
 import React from 'react'
 import { render } from 'react-dom'
 import snapshot from '../snapshot'
-import redoable from '../snapshot/redoable'
+import withAction from '../snapshot/withAction'
 import withActionsLog from '../snapshot/withActionsLog'
+import withMiddleware from '../snapshot/withMiddleware'
+import withPrevState from '../snapshot/withPrevState'
 import withSubscriber from '../snapshot/withSubscriber'
+import withInitialState from '../snapshot/withInitialState'
+import withRewind from '../snapshot/withRewind'
 
 import compose from '../lib/compose'
+import times from '../lib/times'
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -20,22 +25,31 @@ const reducer = (state, action) => {
   }
 }
 
+const loggingMiddleware = (action) => {
+  console.log('NEW ACTION', action)
+
+  return action
+}
+
+const loggingSubscriber = ({ getState, getPrevState, getInitialState, getAction }) => {
+  console.log('INITIAL STATE', getInitialState())
+  console.log('PREV STATE', getPrevState())
+  console.log('ACTION', getAction())
+  console.log('STATE', getState())
+}
+
 const initialState = { items: [] }
 const initialSnapshot = snapshot(reducer, initialState)
 
-const subscriber = (counter = 0) => (snapshot) => {
-  counter ++
-
-  console.log(`Snapshot #${counter}`, snapshot, snapshot.getState())
-}
-
 const start = compose(
   withActionsLog([]),
-  redoable(),
-  withSubscriber(subscriber())
+  withMiddleware(loggingMiddleware),
+  withSubscriber(loggingSubscriber),
+  withPrevState,
+  withInitialState(),
+  withRewind(),
+  withAction()
 )(initialSnapshot)
-
-console.log('Start', start)
 
 const snapshot1 = start.getNext({
   type: 'ADD_ITEM',
@@ -59,7 +73,15 @@ const snapshot4 = snapshot3.getNext({
 
 const snapshot5 = snapshot4.rewind()
 
-const snapshot6 = snapshot5.redo()
+const snapshot6 = snapshot5.rewind()
+
+const snapshot7 = snapshot6.rewind()
+
+const rewind = (amount) => (snapshot) =>
+  times(amount)(
+    (rewinded) => rewinded.rewind(),
+    snapshot
+  )
 
 const snapshots = [
   snapshot1,
@@ -67,10 +89,12 @@ const snapshots = [
   snapshot3,
   snapshot4,
   snapshot5,
-  snapshot6
+  snapshot6,
+  snapshot7,
+  rewind(3)(snapshot4)
 ]
 
-const listItem = ({ name }) => <li>{name}</li>
+const listItem = ({ name }, i) => <li key={i}>{name}</li>
 const list = (snapshot) => <ul>{snapshot.getState().items.map(listItem)}</ul>
 
 render(

@@ -1,3 +1,4 @@
+// NOTE: Peek previous state instead
 const withPrevState = (snapshot) => ({
   ...snapshot,
 

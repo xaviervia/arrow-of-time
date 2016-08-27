@@ -1,7 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
-import snapshot from '../snapshot'
-import redoable from '../snapshot/redoable'
+import timeline from '../timeline'
 import withActionsLog from '../snapshot/withActionsLog'
 import withSubscriber from '../snapshot/withSubscriber'
 
@@ -21,63 +20,62 @@ const reducer = (state, action) => {
 }
 
 const initialState = { items: [] }
-const initialSnapshot = snapshot(reducer, initialState)
+const initialTimeline = timeline(reducer, initialState)
 
-const subscriber = (counter = 0) => (snapshot) => {
+const subscriber = (counter = 0) => (timeline) => {
   counter ++
 
-  console.log(`Snapshot #${counter}`, snapshot, snapshot.getState())
+  console.log(`Timeline #${counter}`, timeline, timeline.getState())
 }
 
 const start = compose(
   withActionsLog([]),
-  redoable(),
   withSubscriber(subscriber())
-)(initialSnapshot)
+)(initialTimeline)
 
 console.log('Start', start)
 
-const snapshot1 = start.getNext({
+const timeline1 = start.getNext({
   type: 'ADD_ITEM',
   payload: { name: 'Milk' }
 })
 
-const snapshot2 = snapshot1.getNext({
+const timeline2 = timeline1.getNext({
   type: 'ADD_ITEM',
   payload: { name: 'Sugar' }
 })
 
-const snapshot3 = snapshot2.getNext({
+const timeline3 = timeline2.getNext({
   type: 'ADD_ITEM',
   payload: { name: 'Honey' }
 })
 
-const snapshot4 = snapshot3.getNext({
+const timeline4 = timeline3.getNext({
   type: 'ADD_ITEM',
   payload: { name: 'Coriander' }
 })
 
-const snapshot5 = snapshot4.rewind()
+const timeline5 = timeline4.rewind()
 
-const snapshot6 = snapshot5.redo()
+const timeline6 = timeline5.redo()
 
-const snapshots = [
-  snapshot1,
-  snapshot2,
-  snapshot3,
-  snapshot4,
-  snapshot5,
-  snapshot6
+const timelines = [
+  timeline1,
+  timeline2,
+  timeline3,
+  timeline4,
+  timeline5,
+  timeline6
 ]
 
 const listItem = ({ name }) => <li>{name}</li>
-const list = (snapshot) => <ul>{snapshot.getState().items.map(listItem)}</ul>
+const list = (timeline) => <ul>{timeline.getState().items.map(listItem)}</ul>
 
 render(
   <div>
-    {snapshots.map(list)}
+    {timelines.map(list)}
     <h2>Actions</h2>
-    {snapshot4.getActions().map(({ type, payload }) => (
+    {timeline4.getActions().map(({ type, payload }) => (
       <dl>
         <dt>{type}</dt>
         <dd>{payload.name}</dd>
