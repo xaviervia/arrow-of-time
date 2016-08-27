@@ -1,4 +1,4 @@
-# Arrow of Time
+# 🏹 Arrow of Time
 
 Redux inspired composable store that treats the snapshots as first class.
 
