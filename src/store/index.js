@@ -7,6 +7,8 @@ export const base = (snapshot) => {
       snapshot = snapshot.getNext(action)
     },
 
+    eject: () => snapshot,
+
     getState: () => snapshot.getState(),
 
     update: (f) => {
