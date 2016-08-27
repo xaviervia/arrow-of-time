@@ -1,6 +1,6 @@
 {
   "name": "arrow-of-time",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Experiment with minimum possible composable implementation of a history (such as a Redux store, Act history, etc).",
   "main": "index.js",
   "scripts": {
