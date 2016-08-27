@@ -24,7 +24,7 @@ const initialTimeline = timeline(reducer, initialState)
 const subscriber = (counter = 0) => (timeline) => {
   counter ++
 
-  console.log(`Timeline #${counter}`, timeline, timeline.getState())
+  console.log(`Timeline #${counter}`, timeline, timeline.getAction(), timeline.getState())
 }
 
 const start = compose(

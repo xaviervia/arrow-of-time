@@ -40,7 +40,7 @@ mainStore.dispatch({
   payload: 'Cream'
 })
 
-mainStore.eject((timeline) => timeline.rewind())
+mainStore.update((timeline) => timeline.rewind())
 
 render(
   <div>

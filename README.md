@@ -115,7 +115,11 @@ store.dispatch({ type: 'item', payload: 'home' }))
 store.dispatch(timelines[0].getNext({ type: 'item', payload: 'sea' }))
 store.dispatch(timelines[1].getNext({ type: 'item', payload: 'mountains' }))
 
-store.eject((timeline) => timeline.rewind())
-store.eject((timeline) => timeline.rewind())
-store.eject((timeline) => timeline.redo())
+store.update((timeline) => timeline.rewind())
+store.update((timeline) => timeline.rewind())
+store.update((timeline) => timeline.redo())
 ```
+
+## Known issues
+
+- `redoable` and `rewindable` need to be the outermost higher order snapshots to be applied, because the way they work they will not play well in spreading the properties set by other higher order snapshots.

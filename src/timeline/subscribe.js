@@ -7,7 +7,12 @@ const subscribe = (subscriber) => (snapshot) => ({
 
     subscriber(prev)
 
-    return prevWithSubscriber
+    return {
+      ...prev,
+      redo: prevWithSubscriber.redo,
+      rewind: prevWithSubscriber.rewind,
+      getNext: prevWithSubscriber.getNext
+    }
   },
 
   redo: () => {
@@ -16,7 +21,12 @@ const subscribe = (subscriber) => (snapshot) => ({
 
     subscriber(next)
 
-    return nextWithSubscriber
+    return {
+      ...next,
+      redo: nextWithSubscriber.redo,
+      rewind: nextWithSubscriber.rewind,
+      getNext: nextWithSubscriber.getNext
+    }
   },
 
   getNext: (action) => {

@@ -13,10 +13,11 @@ export const base = function (...xs) {
 
 export default function (...xs) {
   return compose(
+    redoable(),
     withGetAction(),
     withGetPrevState,
     withGetInitialState()
-  )(base(...xs))
+  )(snapshot(...xs))
 }
 
 export { default as subscribe } from './subscribe'

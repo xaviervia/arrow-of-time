@@ -9,7 +9,7 @@ export const base = (snapshot) => {
 
     getState: () => snapshot.getState(),
 
-    eject: (f) => {
+    update: (f) => {
       snapshot = f(snapshot)
     }
   }
