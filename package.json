@@ -4,6 +4,7 @@
   "description": "Experiment with minimum possible composable implementation of a history (such as a Redux store, Act history, etc).",
   "main": "index.js",
   "scripts": {
+    "clean": "git clean -f && rm -rf demo && rm -rf store && rm -rf timeline && rm -rf snapshot",
     "test": "npm run test:lint && npm run test:unit",
     "build": "sagui build",
     "develop": "sagui develop --port 3000",
